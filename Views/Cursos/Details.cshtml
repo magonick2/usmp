@@ -1,0 +1,22 @@
+@model Curso
+
+<div class="container mt-4">
+    <h3>@Model.Nombre (@Model.Codigo)</h3>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">Créditos</dt>
+        <dd class="col-sm-9">@Model.Creditos</dd>
+        
+        <dt class="col-sm-3">Cupo Disponible</dt>
+        <dd class="col-sm-9">@Model.CupoMaximo</dd>
+
+        <dt class="col-sm-3">Horario</dt>
+        <dd class="col-sm-9">@Model.HorarioInicio a @Model.HorarioFin</dd>
+    </dl>
+
+    <form asp-controller="Matriculas" asp-action="Inscribirse" method="post">
+        <input type="hidden" name="cursoId" value="@Model.Id" />
+        <button type="submit" class="btn btn-success btn-lg">Inscribirse Ahora</button>
+        <a asp-action="Index" class="btn btn-secondary btn-lg">Regresar</a>
+    </form>
+</div>
