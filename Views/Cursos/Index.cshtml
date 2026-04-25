@@ -1,0 +1,44 @@
+@model IEnumerable<Curso>
+
+@{
+    ViewData["Title"] = "Catálogo de Cursos";
+}
+
+<h2 class="mb-4">Catálogo de Cursos Disponibles</h2>
+
+<div class="card mb-4 shadow-sm">
+    <div class="card-body">
+        <form asp-action="Index" method="get" class="row g-3">
+            <div class="col-md-4">
+                <input type="text" name="nombre" class="form-control" placeholder="Buscar por nombre..." />
+            </div>
+            <div class="col-md-3">
+                <input type="number" name="minCreditos" class="form-control" placeholder="Mínimo créditos" />
+            </div>
+            <div class="col-md-3">
+                <input type="time" name="horario" class="form-control" />
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    @foreach (var item in Model) {
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">@item.Nombre</h5>
+                    <p class="card-text">
+                        <strong>Código:</strong> @item.Codigo <br />
+                        <strong>Créditos:</strong> @item.Creditos <br />
+                        <strong>Horario:</strong> @item.HorarioInicio.ToString(@"hh\:mm") - @item.HorarioFin.ToString(@"hh\:mm")
+                    </p>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info">Ver Detalle</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
